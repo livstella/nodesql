@@ -23,6 +23,16 @@ const pool = new Pool({
   });
 
   
+  /** Get all orders with "id" */
+  app.get("/:id", (req, res) => {
+    const { id } = req.params; 
+    pool
+      .query('SELECT * FROM orders WHERE id=$1;', [id])
+      .then(data => res.json(data)) 
+      .catch(e => res.sendStatus(404)); 
+  });
+
+
   
   
   
