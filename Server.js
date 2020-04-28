@@ -62,7 +62,18 @@ app.get("/", (req, res) => {
       .then(data => res.status(201).json(data))
       .catch(e => console.log(e)); 
    });
-   
+
+   /** Dele existing user */
+
+
+   app.delete("/:id", (req, res) => {
+ const { id } = req.params
+ pool
+   .query('DELETE FROM users WHERE id=$1;', [id])
+   .then(data => res.status(201).json(data))
+   .catch(e => console.log(e))
+});
+
 
 
 
