@@ -33,6 +33,21 @@ const pool = new Pool({
   });
 
 
+  /** Create new order */
+  app.use(bodyParser.json());
+
+  app.post("/", (req, res) => {
+    const { id } = req.body
+    const { price } = req.body
+    const { date } = req.body
+    const { user_id } = req.body
+
+    pool
+    .query('INSERT INTO orders(id, price, date, user_id) values($1,$2,$3,$4);', [id, price, date, user_id])
+    .then(data => res.status(201).json(data))
+      .catch(e => console.log(e)); 
+  });
+  
   
   
   
